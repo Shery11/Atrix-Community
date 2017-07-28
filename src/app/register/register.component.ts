@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { UserService } from '../user.service';
+
 import {FormGroup , FormControl, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -14,7 +16,7 @@ export class RegisterComponent implements OnInit {
 
   error;
 
-  constructor(public authService: AuthService,private router:Router) {}
+  constructor(public authService: AuthService,private router:Router,private userService : UserService) {}
 
   
   onSubmit(value) {
@@ -22,7 +24,28 @@ export class RegisterComponent implements OnInit {
     this.authService.signup(value.email, value.password)
     .then( res=>{
        console.log(res.uid);
-       this.router.navigateByUrl('/login');
+       // this.router.navigateByUrl('/login');
+
+       this.userService.registerUser(value.name,value.email,res.uid).subscribe(res => {
+         console.log(res.json());
+         var response = res.json();
+
+         if(response.success){
+            this.router.navigateByUrl('/login');  
+         }else{
+            this.error = "Unknown error occured, contact customer support";
+             setTimeout(()=>{
+               // this.router.navigateByUrl('/register');
+               this.error = false;
+            } , 3000);
+         }
+
+         
+       
+       },e=>{
+          console.log(e);
+       });
+
         
     
     }).catch(err => {

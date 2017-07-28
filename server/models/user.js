@@ -9,7 +9,6 @@ var userSchema = mongoose.Schema({
     },
     last_name:{
        type: String,
-       required : true
     },
      email:{
        type: String,
@@ -24,6 +23,10 @@ var userSchema = mongoose.Schema({
        type: String,
         default : "Enter your CNIC"
        
+    },
+    uid:{
+      type:String,
+      required:true
     },
     phone:{
        type: String,
@@ -61,9 +64,9 @@ var userSchema = mongoose.Schema({
     createdAt:{
     	type: Date,
     	default: Date.now //gets current date
-    }
-    // events: [{ type : Schema.ObjectId, ref: 'event' }],
-    // startups: [{ type : Schema.ObjectId, ref: 'Startup'}]
+    },
+    events: [{ type : mongoose.Schema.Types.ObjectId, ref: 'event' }],
+    startups: [{ type : mongoose.Schema.Types.ObjectId, ref: 'Startup'}]
 
 });
 
@@ -83,19 +86,17 @@ module.exports.getUserById = function(id,callback){
 
 module.exports.addUser = function(user, callback){
     var add = {
-       first_name: user.first_name,
+       first_name: user.name,
        last_name: user.last_name,
        skills: user.skills,
        CNIC: user.CNIC,
+       uid : user.uid,
        email :user.email,
        phone: user.phone,
        experience: user.experience,
        freelancer: user.freelancer,
        favorite_language: user.favorite_language,
-       // area:{
-       //   city: user.area.city,
-       //   state: user.area.state
-       //  }
+       
     }
 
     console.log(add);

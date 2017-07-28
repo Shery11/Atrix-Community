@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import {FormGroup , FormControl, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
-
-
+import {CookieService } from 'ngx-cookie';
 
 
 
@@ -21,15 +20,19 @@ export class LoginComponent implements OnInit {
   }
 
 
-   constructor(public authService: AuthService,private router:Router) {}
-
-	 
+   constructor(public authService: AuthService,private router:Router,private cookie : CookieService) {}
 
 	  onSubmit(value) {
 	    
 	    this.authService.login(value.email, value.password).then(res => {
         this.router.navigateByUrl('/dashboard');
-        console.log('Nice, it worked!',res.uid);
+        console.log(res.uid);
+
+        this.cookie.put('token',res.uid);
+
+
+
+
        
       })
       .catch(err => {

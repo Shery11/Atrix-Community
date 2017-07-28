@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {AngularFireModule} from 'angularfire2';
 import { FormsModule } from '@angular/forms';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { HttpModule }    from '@angular/http';
+import { CookieModule } from 'ngx-cookie';
 
 
 
@@ -27,7 +28,9 @@ import { RegisterComponent } from './register/register.component';
 
 // services
 import { AuthService } from './auth.service';
-
+import { AngularFireAuth } from 'angularfire2/auth';
+import {AuthGuardService} from './auth-guard.service';
+import {UserService} from './user.service';
 
 export const firebaseConfig = {
    
@@ -63,7 +66,9 @@ export const firebaseConfig = {
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    CookieModule.forRoot(),
     RouterModule.forRoot([
        {
           path:'',
@@ -120,7 +125,7 @@ export const firebaseConfig = {
     ])
 
   ],
-  providers: [AuthService,AngularFireAuth],
+  providers: [AuthService,AngularFireAuth,AuthGuardService,UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
