@@ -81,6 +81,7 @@ export const firebaseConfig = {
        },
        {
            path : 'dashboard',
+           canActivate:[AuthGuardService],
            component: DashboardComponent,
            children : [
 
@@ -108,7 +109,7 @@ export const firebaseConfig = {
             {
               path: 'about',
               component : AboutComponent
-            }
+            },
            ]
        },
         {

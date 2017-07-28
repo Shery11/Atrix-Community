@@ -18,8 +18,8 @@ router.get('/getAllUsers',function(req,res){
 
 
 // get Single User
-router.get('/getUser/:id',function(req,res){
- 	User.getUserById(req.params.id,function(err, user){
+router.get('/getUserData/:id',function(req,res){
+ 	User.getUserByuid(req.params.id,function(err, user){
  		if(err){
     		res.json({success:false,data:err});
     	}else{

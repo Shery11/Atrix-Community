@@ -79,8 +79,8 @@ module.exports.getUsers = function(callback,limit){
 }
 
 
-module.exports.getUserById = function(id,callback){
-  User.findById(id,callback);
+module.exports.getUserByuid = function(id,callback){
+  User.find({uid:id},callback);
 }
 
 

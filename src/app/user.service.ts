@@ -19,4 +19,10 @@ export class UserService {
   	return this.http.post('/user/addUser',data)
   } 
 
+
+  getUserData(id){
+  	// make a route
+  	return this.http.get('/getUserData/'+id);
+  }
+
 }

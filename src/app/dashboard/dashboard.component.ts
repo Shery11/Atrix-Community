@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {CookieService } from 'ngx-cookie';
-import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
+
 
 
 
@@ -12,8 +13,20 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public authService: AuthService,private router:Router,private cookie : CookieService) { }
+  constructor(private userService : UserService,private router:Router,private cookie : CookieService) { }
+   
+   // authenticate(){
+   // 	if(this.cookie.get('token')){
+   // 		this.userService.getUserData(this.cookie.get('token')).subscribe(res=>{
+           
+   // 		},e=>{
 
+   // 		})
+   // 	}
+   // }
+   
+
+  
   ngOnInit() {
   }
 
