@@ -1,7 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {RouterModule} from '@angular/router';
+import {AngularFireModule} from 'angularfire2';
+import { FormsModule } from '@angular/forms';
+import { AngularFireAuth } from 'angularfire2/auth';
 
+
+
+// components
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule }  from '@angular/platform-browser/animations';
 import { AdminComponent } from './admin/admin.component';
@@ -19,7 +25,18 @@ import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.co
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
+// services
+import { AuthService } from './auth.service';
 
+
+export const firebaseConfig = {
+   
+    apiKey: "AIzaSyBXQtMJ62d4kgWrgvEmpnEdvxccu3dWqJo",
+    authDomain: "atrix-community.firebaseapp.com",
+    databaseURL: "https://atrix-community.firebaseio.com",
+    projectId: "atrix-community",
+    storageBucket: "",
+}
 
 
 @NgModule({
@@ -45,6 +62,8 @@ import { RegisterComponent } from './register/register.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
+    AngularFireModule.initializeApp(firebaseConfig),
     RouterModule.forRoot([
        {
           path:'',
@@ -54,10 +73,6 @@ import { RegisterComponent } from './register/register.component';
        {
          path:'landing',
          component: LandingComponent
-       },
-       {
-            path:'home',
-            component: HomeComponent
        },
        {
            path : 'dashboard',
@@ -91,17 +106,21 @@ import { RegisterComponent } from './register/register.component';
             }
            ]
        },
-       {
-         path: 'profile',
-         component:ProfileComponent
-       },
+        {
+          path : 'login',
+          component : LoginComponent
+        },
+        {
+          path: 'register',
+          component: RegisterComponent
+        },
        { path: '**', 
          component: PageNotFoundComponent 
        }
     ])
 
   ],
-  providers: [],
+  providers: [AuthService,AngularFireAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
