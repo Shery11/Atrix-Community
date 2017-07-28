@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import {FormGroup , FormControl, Validators} from '@angular/forms';
-	
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-register',
@@ -10,14 +12,28 @@ import {FormGroup , FormControl, Validators} from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-  
+  error;
 
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService,private router:Router) {}
 
   
   onSubmit(value) {
-  	console.log(value);
-    this.authService.signup(value.email, value.password);
+  	
+    this.authService.signup(value.email, value.password)
+    .then( res=>{
+       console.log(res.uid);
+       this.router.navigateByUrl('/login');
+        
+    
+    }).catch(err => {
+    
+        this.error = err.message;
+
+        setTimeout(()=>{
+           // this.router.navigateByUrl('/register');
+           this.error = false;
+        } , 3000);
+    })
     // this.email = this.password = '';
   }
 

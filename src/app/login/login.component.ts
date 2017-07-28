@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+	error;
  
   ngOnInit() {
   }
@@ -25,7 +27,20 @@ export class LoginComponent implements OnInit {
 
 	  onSubmit(value) {
 	    
-	    this.authService.login(value.email, value.password);
+	    this.authService.login(value.email, value.password).then(res => {
+        this.router.navigateByUrl('/dashboard');
+        console.log('Nice, it worked!',res.uid);
+       
+      })
+      .catch(err => {
+
+        this.error = err.message
+        setTimeout(()=>{
+           // this.router.navigate(['register']);
+           this.error = false;
+        } , 3000);
+       
+      });
 	      
 	  }
 
