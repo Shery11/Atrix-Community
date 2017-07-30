@@ -34,6 +34,23 @@ export class AuthService {
     
   }
 
+  signInWithFacebook() {
+     return this.firebaseAuth.auth
+      .signInWithPopup(new firebase.auth.FacebookAuthProvider());
+   }
+
+  signInWithGoogle() {
+     return this.firebaseAuth.auth
+      .signInWithPopup(new firebase.auth.GoogleAuthProvider());
+      
+    }
+
+  signInWithGithub() {
+    return this.firebaseAuth.auth
+      .signInWithPopup(new firebase.auth.GithubAuthProvider());
+      
+      }
+
   logout() {
     this.firebaseAuth
       .auth

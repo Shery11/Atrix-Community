@@ -80,7 +80,7 @@ module.exports.getUsers = function(callback,limit){
 
 
 module.exports.getUserByuid = function(id,callback){
-  User.find({uid:id},callback);
+  User.findOne({uid:id},callback);
 }
 
 
@@ -98,8 +98,6 @@ module.exports.addUser = function(user, callback){
        favorite_language: user.favorite_language,
        
     }
-
-    console.log(add);
 
     User.create(add,callback); 
 }

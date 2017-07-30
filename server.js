@@ -27,15 +27,17 @@ mongoose.connect('mongodb://localhost/atrixCommunity', {
 	console.log('Connected to Atrix database');
 });
 
+app.use('/user',userRoutes);
+app.use('/startup',startupRoutes);
+app.use('/event',eventsRoutes);
+
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
-app.use('/user',userRoutes);
-app.use('/startup',startupRoutes);
-app.use('/event',eventsRoutes);
+
 
 const port = process.env.PORT || '3000';
 app.set('port', port);

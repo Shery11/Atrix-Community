@@ -22,7 +22,7 @@ export class UserService {
 
   getUserData(id){
   	// make a route
-  	return this.http.get('/getUserData/'+id);
+  	return this.http.get('/user/getUserData/'+id);
   }
 
 }

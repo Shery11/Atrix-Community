@@ -10,7 +10,7 @@ router.get('/getAllUsers',function(req,res){
  		if(err){
 			res.json({success:false,data:err});
 		}else{
-	       res.json({success:true,data:user});
+	       res.json({success:true,data:users});
 		}
  		
  	});
@@ -19,11 +19,11 @@ router.get('/getAllUsers',function(req,res){
 
 // get Single User
 router.get('/getUserData/:id',function(req,res){
- 	User.getUserByuid(req.params.id,function(err, user){
- 		if(err){
-    		res.json({success:false,data:err});
+   User.getUserByuid(req.params.id,function(err, user){
+ 		if(user){
+    		res.json({success:true,data:user});
     	}else{
-           res.json({success:true,data:user});
+           res.json({success:false,data:"No user found"});
     	}
     });
  });

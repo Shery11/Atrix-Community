@@ -24,8 +24,7 @@ export class RegisterComponent implements OnInit {
     this.authService.signup(value.email, value.password)
     .then( res=>{
        console.log(res.uid);
-       // this.router.navigateByUrl('/login');
-
+     
        this.userService.registerUser(value.name,value.email,res.uid).subscribe(res => {
          console.log(res.json());
          var response = res.json();
